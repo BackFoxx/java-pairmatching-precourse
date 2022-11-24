@@ -1,51 +1,16 @@
 package pairmatching;
 
-import pairmatching.system.CrewsMaker;
 import pairmatching.system.DependencyContainer;
-import pairmatching.system.MissionMaker;
-import pairmatching.system.holder.CrewsHolder;
-import pairmatching.system.holder.MissionHolder;
+import pairmatching.system.util.SetupUtil;
 import pairmatching.view.InputView;
 import pairmatching.vo.Todo;
 
-import java.util.List;
-
 public class Application {
-
-    public static final String FRONTEND_CREW_PATH = "src/main/resources/frontend-crew.md";
-    public static final String BACKEND_CREW_MD_PATH = "src/main/resources/backend-crew.md";
-
     public static void main(String[] args) {
-        setup();
+        SetupUtil setupUtil = DependencyContainer.getSetupUtil();
+        setupUtil.setup();
 
         InputView inputView = new InputView();
         Todo todo = inputView.getTodoCommand();
-
-    }
-
-    private static void setup() {
-        setCrews();
-        setMissions();
-    }
-
-    private static void setMissions() {
-        MissionMaker missionMaker = new MissionMaker();
-        MissionHolder.set(missionMaker.makeMissions());
-    }
-
-    private static void setCrews() {
-        CrewsMaker crewMaker = DependencyContainer.getCrewMaker();
-        CrewsHolder.set(
-                getBackEndCrews(crewMaker),
-                getFrontEndCrews(crewMaker)
-        );
-    }
-
-    private static List<String> getFrontEndCrews(CrewsMaker crewsMaker) {
-        return crewsMaker.readCrewsFromFile(FRONTEND_CREW_PATH);
-    }
-
-    private static List<String> getBackEndCrews(CrewsMaker crewsMaker) {
-        return crewsMaker.readCrewsFromFile(BACKEND_CREW_MD_PATH);
     }
 }

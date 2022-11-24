@@ -1,15 +1,12 @@
 package pairmatching.vo;
 
-public enum Level {
-    LEVEL1("레벨1"),
-    LEVEL2("레벨2"),
-    LEVEL3("레벨3"),
-    LEVEL4("레벨4"),
-    LEVEL5("레벨5");
+public enum Course {
+    BACKEND("백엔드"),
+    FRONTEND("프론트엔드");
 
     private String name;
 
-    Level(String name) {
+    Course(String name) {
         this.name = name;
     }
 
