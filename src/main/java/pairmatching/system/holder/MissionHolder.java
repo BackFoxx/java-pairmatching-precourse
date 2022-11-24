@@ -22,4 +22,19 @@ public class MissionHolder {
                 .stream().filter(mission -> mission.isLevel(level))
                 .collect(Collectors.toList());
     }
+
+    public static boolean isValidMissionName(String missionName) {
+        List<String> names = missions.get()
+                .stream().map(mission -> mission.getName())
+                .collect(Collectors.toList());
+
+        return names.contains(missionName);
+    }
+
+    public static Mission getByName(String name) {
+        return missions.get()
+                .stream().filter(mission -> name.equals(mission.getName()))
+                .findAny()
+                .orElseThrow(IllegalStateException::new);
+    }
 }

@@ -1,5 +1,9 @@
 package pairmatching.vo;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Level {
     LEVEL1("레벨1"),
     LEVEL2("레벨2"),
@@ -17,5 +21,20 @@ public enum Level {
 
     public String getName() {
         return name;
+    }
+
+    public static boolean isValidLevelName(String levelName) {
+        List<String> names = Arrays.stream(Level.values())
+                .map(level -> level.getName())
+                .collect(Collectors.toList());
+
+        return names.contains(levelName);
+    }
+
+    public static Level getByName(String name) {
+        return Arrays.stream(Level.values())
+                .filter(course -> name.equals(course.getName()))
+                .findAny()
+                .orElseThrow(IllegalStateException::new);
     }
 }
