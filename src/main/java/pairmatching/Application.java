@@ -6,10 +6,10 @@ import pairmatching.system.util.SetupUtil;
 
 public class Application {
     public static void main(String[] args) {
-        SetupUtil setupUtil = DependencyContainer.getSetupUtil();
-        setupUtil.setup();
+        DependencyContainer dependencyContainer = new DependencyContainer();
+        dependencyContainer.getSetupUtil().setup();
 
-        PairController pairController = DependencyContainer.getPairController();
+        PairController pairController = dependencyContainer.getPairController();
         pairController.run();
     }
 }

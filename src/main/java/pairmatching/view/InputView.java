@@ -1,7 +1,7 @@
 package pairmatching.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import pairmatching.system.holder.MissionHolder;
+import pairmatching.repository.MissionRepository;
 import pairmatching.system.validation.InputToPairSetValidator;
 import pairmatching.system.validation.InputToTodoValidator;
 import pairmatching.vo.Course;
@@ -20,13 +20,13 @@ public class InputView {
         return Todo.getByValue(input);
     }
 
-    public PairSet getPairSet() {
+    public PairSet getPairSet(MissionRepository missionRepository) {
         String input = readInput();
-        InputToPairSetValidator.validate(input);
-        return convertInputToPairSet(input);
+        InputToPairSetValidator.validate(input, missionRepository);
+        return convertInputToPairSet(input, missionRepository);
     }
 
-    private PairSet convertInputToPairSet(String input) {
+    private PairSet convertInputToPairSet(String input, MissionRepository missionRepository) {
         List<String> commands = Arrays.stream(input.split(","))
                 .map(String::trim)
                 .collect(Collectors.toList());
@@ -34,7 +34,7 @@ public class InputView {
         return new PairSet(
                 Course.getByName(commands.get(0)),
                 Level.getByName(commands.get(1)),
-                MissionHolder.getByName(commands.get(2))
+                missionRepository.getByName(commands.get(2))
         );
     }
 

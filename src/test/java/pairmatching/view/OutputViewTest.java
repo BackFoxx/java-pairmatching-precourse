@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pairmatching.system.DependencyContainer;
-import pairmatching.system.util.SetupUtil;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -16,11 +15,12 @@ class OutputViewTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private final OutputView outputView = new OutputView();
+    private DependencyContainer dependencyContainer;
 
     @BeforeEach
     public void setUp() {
-        SetupUtil setupUtil = DependencyContainer.getSetupUtil();
-        setupUtil.setup();
+        dependencyContainer = new DependencyContainer();
+        dependencyContainer.getSetupUtil().setup();
 
         System.setOut(new PrintStream(outputStreamCaptor));
     }
@@ -49,7 +49,7 @@ class OutputViewTest {
     @DisplayName("과정, 레벨, 미션을 선택하도록 유도하는 메시지를 출력한다.")
     void thenPrintsWhatToMatchMessage() {
         //given
-        outputView.printSelectWhatToMatchMessage();
+        outputView.printSelectWhatToMatchMessage(dependencyContainer.getMissionRepository());
 
         //then
         assertThat(outputStreamCaptor.toString())

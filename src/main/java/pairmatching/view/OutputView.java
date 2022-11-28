@@ -1,6 +1,6 @@
 package pairmatching.view;
 
-import pairmatching.system.holder.MissionHolder;
+import pairmatching.repository.MissionRepository;
 import pairmatching.vo.Course;
 import pairmatching.vo.Level;
 import pairmatching.vo.Mission;
@@ -25,25 +25,25 @@ public class OutputView {
         }
     }
 
-    public void printSelectWhatToMatchMessage() {
+    public void printSelectWhatToMatchMessage(MissionRepository missionRepository) {
         System.out.printf(LINE_SEPARATOR);
         printCourseMessage();
-        printMissions();
+        printMissions(missionRepository);
         System.out.printf(LINE_SEPARATOR);
         System.out.printf(ASKING_TO_SELECT_WHAT_TO_MATCH_MESSAGE);
         System.out.printf(SELECT_WHAT_TO_MATCH_EXAMPLE_MESSAGE);
     }
 
-    private void printMissions() {
+    private void printMissions(MissionRepository missionRepository) {
         System.out.printf("미션:%n");
         for (Level level : Level.values()) {
             System.out.printf("  - %s: ", level.getName());
-            printMissionsHavingLevel(level);
+            printMissionsHavingLevel(level, missionRepository);
         }
     }
 
-    private void printMissionsHavingLevel(Level level) {
-        List<Mission> missions = MissionHolder.findByLevel(level);
+    private void printMissionsHavingLevel(Level level, MissionRepository missionRepository) {
+        List<Mission> missions = missionRepository.findByLevel(level);
         Iterator<Mission> iterator = missions.iterator();
         while (iterator.hasNext()) {
             System.out.print(iterator.next());

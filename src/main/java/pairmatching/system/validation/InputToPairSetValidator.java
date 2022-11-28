@@ -1,6 +1,6 @@
 package pairmatching.system.validation;
 
-import pairmatching.system.holder.MissionHolder;
+import pairmatching.repository.MissionRepository;
 import pairmatching.vo.Course;
 import pairmatching.vo.Level;
 
@@ -15,14 +15,14 @@ public class InputToPairSetValidator {
     public static final String INVALID_LEVEL_NAME_MESSAGE = "올바른 레벨 이름이 아닙니다.";
     public static final String INVALID_MISSION_NAME_MESSAGE = "올바른 미션 이름이 아닙니다.";
 
-    public static void validate(String target) {
+    public static void validate(String target, MissionRepository missionRepository) {
         try {
             List<String> commands = Arrays.stream(target.split(","))
                     .map(String::trim)
                     .collect(Collectors.toList());
             isValidCourseName(commands.get(0));
             isValidLevelName(commands.get(1));
-            isValidMissionName(commands.get(2));
+            isValidMissionName(commands.get(2), missionRepository);
         } catch (IndexOutOfBoundsException e) {
             throw new IllegalArgumentException(INVALID_VALUE_SPLITTED_BY_COMMA);
         }
@@ -40,8 +40,8 @@ public class InputToPairSetValidator {
         }
     }
 
-    private static void isValidMissionName(String missionName) {
-        if (!MissionHolder.isValidMissionName(missionName)) {
+    private static void isValidMissionName(String missionName, MissionRepository missionRepository) {
+        if (!missionRepository.isValidMissionName(missionName)) {
             throw new IllegalArgumentException(INVALID_MISSION_NAME_MESSAGE);
         }
     }

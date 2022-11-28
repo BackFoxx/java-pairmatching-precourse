@@ -5,7 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pairmatching.mock.MockInputView;
 import pairmatching.system.DependencyContainer;
-import pairmatching.system.util.SetupUtil;
 import pairmatching.vo.PairSet;
 import pairmatching.vo.Todo;
 
@@ -15,13 +14,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class InputViewTest {
-
+    private DependencyContainer dependencyContainer = null;
     @BeforeEach
     public void setUp() {
-        SetupUtil setupUtil = DependencyContainer.getSetupUtil();
-        setupUtil.setup();
+        dependencyContainer = new DependencyContainer();
+        dependencyContainer.getSetupUtil().setup();
     }
-
 
     @Test
     @DisplayName("사용자로부터 기능 선택을 받을 수 있다.")
@@ -50,7 +48,7 @@ class InputViewTest {
         //given
         InputView inputView = new MockInputView(Arrays.asList("백엔드, 레벨1, 자동차경주"));
         //when
-        PairSet pairSet = inputView.getPairSet();
+        PairSet pairSet = inputView.getPairSet(dependencyContainer.getMissionRepository());
         //then
         assertThat(pairSet.getCourse().getName()).isEqualTo("백엔드");
         assertThat(pairSet.getLevel().getName()).isEqualTo("레벨1");
