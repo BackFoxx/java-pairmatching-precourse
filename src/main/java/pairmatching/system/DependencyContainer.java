@@ -3,6 +3,8 @@ package pairmatching.system;
 import pairmatching.controller.PairController;
 import pairmatching.repository.CrewRepository;
 import pairmatching.repository.MissionRepository;
+import pairmatching.repository.PairRepository;
+import pairmatching.service.PairService;
 import pairmatching.system.util.SetupUtil;
 import pairmatching.view.InputView;
 import pairmatching.view.OutputView;
@@ -16,6 +18,8 @@ public class DependencyContainer {
     private OutputView outputView = null;
     private MissionRepository missionRepository = null;
     private CrewRepository crewRepository = null;
+    private PairService pairService = null;
+    private PairRepository pairRepository = null;
 
     public SetupUtil getSetupUtil() {
         if (setupUtil == null) {
@@ -42,7 +46,9 @@ public class DependencyContainer {
 
     public PairController getPairController() {
         if (pairController == null) {
-            pairController = new PairController(getInputView(), getOutputView(), getMissionRepository());
+            pairController = new PairController(
+                    getInputView(), getOutputView(), getMissionRepository(), getPairService()
+            );
         }
         return pairController;
     }
@@ -73,5 +79,19 @@ public class DependencyContainer {
             crewRepository = new CrewRepository();
         }
         return crewRepository;
+    }
+
+    public PairRepository getPairRepository() {
+        if (pairRepository == null) {
+            pairRepository = new PairRepository();
+        }
+        return pairRepository;
+    }
+
+    public PairService getPairService() {
+        if (pairService == null) {
+            pairService = new PairService(getPairRepository(), getCrewRepository());
+        }
+        return pairService;
     }
 }

@@ -2,9 +2,9 @@ package pairmatching.view;
 
 import pairmatching.repository.MissionRepository;
 import pairmatching.vo.Course;
-import pairmatching.vo.Level;
+import pairmatching.vo.enums.Level;
 import pairmatching.vo.Mission;
-import pairmatching.vo.Todo;
+import pairmatching.vo.enums.Todo;
 
 import java.util.Arrays;
 import java.util.Iterator;

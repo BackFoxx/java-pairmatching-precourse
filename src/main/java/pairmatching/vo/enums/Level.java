@@ -1,4 +1,4 @@
-package pairmatching.vo;
+package pairmatching.vo.enums;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,7 +11,7 @@ public enum Level {
     LEVEL4("레벨4"),
     LEVEL5("레벨5");
 
-    private String name;
+    private final String name;
 
     Level(String name) {
         this.name = name;
@@ -25,7 +25,7 @@ public enum Level {
 
     public static boolean isValidLevelName(String levelName) {
         List<String> names = Arrays.stream(Level.values())
-                .map(level -> level.getName())
+                .map(Level::getName)
                 .collect(Collectors.toList());
 
         return names.contains(levelName);

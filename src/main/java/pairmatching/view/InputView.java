@@ -5,9 +5,9 @@ import pairmatching.repository.MissionRepository;
 import pairmatching.system.validation.InputToPairSetValidator;
 import pairmatching.system.validation.InputToTodoValidator;
 import pairmatching.vo.Course;
-import pairmatching.vo.Level;
+import pairmatching.vo.enums.Level;
 import pairmatching.vo.PairSet;
-import pairmatching.vo.Todo;
+import pairmatching.vo.enums.Todo;
 
 import java.util.Arrays;
 import java.util.List;

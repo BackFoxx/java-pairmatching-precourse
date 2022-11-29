@@ -1,4 +1,4 @@
-package pairmatching.vo;
+package pairmatching.vo.enums;
 
 public enum Todo {
     MATCHING("1", "페어 매칭"),

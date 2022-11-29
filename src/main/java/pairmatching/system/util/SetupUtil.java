@@ -4,6 +4,8 @@ import pairmatching.repository.CrewRepository;
 import pairmatching.repository.MissionRepository;
 import pairmatching.system.CrewsMaker;
 import pairmatching.system.MissionMaker;
+import pairmatching.vo.Course;
+import pairmatching.vo.Crew;
 
 import java.util.List;
 
@@ -37,11 +39,10 @@ public class SetupUtil {
 
     private void setCrews() {
         crewsRepository.saveAll(
-                getBackEndCrews(crewsMaker),
-                getFrontEndCrews(crewsMaker)
+                Crew.from(getBackEndCrews(crewsMaker), Course.BACKEND),
+                Crew.from(getFrontEndCrews(crewsMaker), Course.FRONTEND)
         );
     }
-
     private List<String> getFrontEndCrews(CrewsMaker crewsMaker) {
         return crewsMaker.readCrewsFromFile(FRONTEND_CREW_PATH);
     }

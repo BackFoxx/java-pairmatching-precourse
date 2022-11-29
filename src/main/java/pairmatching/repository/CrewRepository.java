@@ -1,23 +1,30 @@
 package pairmatching.repository;
 
+import camp.nextstep.edu.missionutils.Randoms;
+import pairmatching.vo.Crew;
+
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class CrewRepository {
-    public final List<String> backEndCrews = new ArrayList<>();
-    public final List<String> frontEndCrews = new ArrayList<>();
+    private final List<Crew> backEndCrews = new ArrayList<>();
+    private final List<Crew> frontEndCrews = new ArrayList<>();
 
-    public void saveAll(List<String> backEndCrews, List<String> frontEndCrews) {
+    public void saveAll(List<Crew> backEndCrews, List<Crew> frontEndCrews) {
         this.backEndCrews.addAll(backEndCrews);
         this.frontEndCrews.addAll(frontEndCrews);
     }
 
-    public List<String> findAllBackEndCrews() {
-        return Collections.unmodifiableList(backEndCrews);
+    public List<Crew> findAllBackEndCrews() {
+        return new ArrayList<>(backEndCrews);
     }
 
-    public List<String> findAllFrontEndCrews() {
-        return Collections.unmodifiableList(frontEndCrews);
+    public List<Crew> findAllFrontEndCrews() {
+        return new ArrayList<>(frontEndCrews);
+    }
+
+    public void shuffleCrews() {
+        Randoms.shuffle(backEndCrews);
+        Randoms.shuffle(frontEndCrews);
     }
 }

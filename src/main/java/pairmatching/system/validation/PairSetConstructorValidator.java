@@ -1,6 +1,6 @@
 package pairmatching.system.validation;
 
-import pairmatching.vo.Level;
+import pairmatching.vo.enums.Level;
 import pairmatching.vo.Mission;
 
 public class PairSetConstructorValidator {

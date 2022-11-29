@@ -1,6 +1,6 @@
 package pairmatching.system.validation;
 
-import pairmatching.vo.Todo;
+import pairmatching.vo.enums.Todo;
 
 public class InputToTodoValidator {
     public static void validate(String input) {

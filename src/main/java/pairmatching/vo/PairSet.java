@@ -1,6 +1,7 @@
 package pairmatching.vo;
 
 import pairmatching.system.validation.PairSetConstructorValidator;
+import pairmatching.vo.enums.Level;
 
 public class PairSet {
     private final Course course;

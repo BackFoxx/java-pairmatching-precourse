@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import pairmatching.mock.MockInputView;
 import pairmatching.system.DependencyContainer;
 import pairmatching.vo.PairSet;
-import pairmatching.vo.Todo;
+import pairmatching.vo.enums.Todo;
 
 import java.util.Arrays;
 

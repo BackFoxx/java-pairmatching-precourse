@@ -2,7 +2,7 @@ package pairmatching.system.validation;
 
 import pairmatching.repository.MissionRepository;
 import pairmatching.vo.Course;
-import pairmatching.vo.Level;
+import pairmatching.vo.enums.Level;
 
 import java.util.Arrays;
 import java.util.List;

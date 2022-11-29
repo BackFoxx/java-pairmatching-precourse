@@ -1,6 +1,6 @@
 package pairmatching.repository;
 
-import pairmatching.vo.Level;
+import pairmatching.vo.enums.Level;
 import pairmatching.vo.Mission;
 
 import java.util.ArrayList;
