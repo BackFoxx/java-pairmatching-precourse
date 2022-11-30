@@ -2,6 +2,7 @@ package pairmatching.view;
 
 import pairmatching.repository.MissionRepository;
 import pairmatching.vo.Course;
+import pairmatching.vo.Pair;
 import pairmatching.vo.enums.Level;
 import pairmatching.vo.Mission;
 import pairmatching.vo.enums.Todo;
@@ -17,6 +18,7 @@ public class OutputView {
     public static final String LINE_SEPARATOR = "#############################################%n";
     public static final String ASKING_TO_SELECT_WHAT_TO_MATCH_MESSAGE = "과정, 레벨, 미션을 선택하세요.%n";
     public static final String SELECT_WHAT_TO_MATCH_EXAMPLE_MESSAGE = "ex) 백엔드, 레벨1, 자동차경주%n";
+    public static final String MATCHING_ALREADY_EXISTING_MESSAGE = "매칭 정보가 있습니다. 다시 매칭하시겠습니까?";
 
     public void printSelectTodoMessage() {
         System.out.printf(ASKING_TO_SELECT_TODO_MESSAGE);
@@ -34,6 +36,22 @@ public class OutputView {
         System.out.printf(SELECT_WHAT_TO_MATCH_EXAMPLE_MESSAGE);
     }
 
+    public void printMatchingResultMessage(List<Pair> pairs) {
+        System.out.printf("페어 매칭 결과입니다.%n");
+        for (Pair pair : pairs) {
+            printEachPair(pair);
+        }
+    }
+
+    private void printEachPair(Pair pair) {
+        Iterator<String> iterator = pair.getCrewNames().iterator();
+        while (iterator.hasNext()) {
+            System.out.print(iterator.next());
+            addSeparator(iterator, ":");
+        }
+        System.out.println();
+    }
+
     private void printMissions(MissionRepository missionRepository) {
         System.out.printf("미션:%n");
         for (Level level : Level.values()) {
@@ -47,7 +65,7 @@ public class OutputView {
         Iterator<Mission> iterator = missions.iterator();
         while (iterator.hasNext()) {
             System.out.print(iterator.next());
-            addSeparator(iterator);
+            addSeparator(iterator, "|");
         }
         System.out.println();
     }
@@ -57,14 +75,18 @@ public class OutputView {
         Iterator<Course> courses = Arrays.stream(Course.values()).iterator();
         while (courses.hasNext()) {
             System.out.print(courses.next().getName());
-            addSeparator(courses);
+            addSeparator(courses, "|");
         }
         System.out.println();
     }
 
-    private static void addSeparator(Iterator<?> courses) {
-        if (courses.hasNext()) {
-            System.out.print(" | ");
+    private static void addSeparator(Iterator<?> iterator, String separator) {
+        if (iterator.hasNext()) {
+            System.out.printf(" %s ", separator);
         }
+    }
+
+    public void printPairAlreadyExistsMessage() {
+        System.out.println(MATCHING_ALREADY_EXISTING_MESSAGE);
     }
 }

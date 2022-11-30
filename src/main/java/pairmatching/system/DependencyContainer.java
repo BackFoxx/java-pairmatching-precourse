@@ -47,7 +47,7 @@ public class DependencyContainer {
     public PairController getPairController() {
         if (pairController == null) {
             pairController = new PairController(
-                    getInputView(), getOutputView(), getMissionRepository(), getPairService()
+                    getInputView(), getOutputView(), getMissionRepository(), getPairRepository(), getPairService()
             );
         }
         return pairController;

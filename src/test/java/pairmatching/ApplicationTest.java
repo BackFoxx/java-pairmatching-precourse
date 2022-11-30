@@ -15,7 +15,6 @@ class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
-    @Disabled
     void 짝수_인원_페어_매칭() {
         assertShuffleTest(
             () -> {
@@ -27,7 +26,6 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    @Disabled
     void 없는_미션에_대한_예외_처리() {
         assertSimpleTest(
             () -> {

@@ -3,10 +3,12 @@ package pairmatching.view;
 import camp.nextstep.edu.missionutils.Console;
 import pairmatching.repository.MissionRepository;
 import pairmatching.system.validation.InputToPairSetValidator;
+import pairmatching.system.validation.InputToReMatchingCommandValidator;
 import pairmatching.system.validation.InputToTodoValidator;
 import pairmatching.vo.Course;
 import pairmatching.vo.enums.Level;
 import pairmatching.vo.PairSet;
+import pairmatching.vo.enums.ReMatchingCommand;
 import pairmatching.vo.enums.Todo;
 
 import java.util.Arrays;
@@ -14,6 +16,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class InputView {
+    public ReMatchingCommand getReMatchingCommand() {
+        String input = readInput();
+        InputToReMatchingCommandValidator.validate(input);
+        return ReMatchingCommand.getByValue(input);
+    }
+
     public Todo getTodoCommand() {
         String input = readInput();
         InputToTodoValidator.validate(input);

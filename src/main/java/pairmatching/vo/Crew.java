@@ -19,4 +19,8 @@ public class Crew {
         }
         return crews;
     }
+
+    public String getName() {
+        return name;
+    }
 }
